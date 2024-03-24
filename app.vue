@@ -193,4 +193,24 @@ onMounted(() => {
     object-fit: contain;
   }
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active .gallery__overlayImage,
+.fade-leave-active .gallery__overlayImage {
+  transition: transform 0.5s ease;
+}
+
+.fade-enter-from .gallery__overlayImage,
+.fade-leave-to .gallery__overlayImage {
+  transform: translateX(100%);
+}
 </style>
