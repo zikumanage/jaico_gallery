@@ -1,14 +1,29 @@
 <template>
   <div class="scroll_container">
       <div class="sticky_wrap">
+        <img class="header__logo" src="~/assets/images/logo_w.png">
         <div class="horizontal_scroll">
-          <div class="scroll_contents red">
-            <h2 class="left">Hello</h2>
+          <div class="scroll_contents fv">
+            <img class="fv__logo" src="~/assets/images/logo_b.png">
           </div>
-          <div class="scroll_contents yellow"></div>
-          <div class="scroll_contents green"></div>
-          <div class="scroll_contents blue">
-            <h2 class="right">Goodbye</h2>
+          <div class="scroll_contents pick_up_01">
+            <img class="pick_up_01__banner" src="~/assets/images/backnumber/2023_01.jpg">
+          </div>
+          <div class="scroll_contents pick_up_02">
+            <img class="pick_up_02__banner" src="~/assets/images/backnumber/2022_01.jpg">
+          </div>
+          <div class="scroll_contents gallery">
+            <div class="gallery__wrap">
+              <div class="gallery__links">
+                <a><img src="~/assets/images/link_2024.png"></a>
+                <a><img src="~/assets/images/link_2023.png"></a>
+                <a><img src="~/assets/images/link_2022.png"></a>
+                <a><img src="~/assets/images/link_2021.png"></a>
+              </div>
+              <div class="gallery__contents">
+                <GallaryItem v-for="n in backnumberLength[0]" :length = "n" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -16,6 +31,9 @@
 </template>
 
 <script setup lang="ts">
+
+const backnumberLength = ref([2,4,1,3])
+
 
 const transform = (section) => {
   const offsetTop = section.parentElement.offsetTop;
@@ -47,6 +65,18 @@ onMounted(() => {
   height: 400vh;
 }
 
+.sticky_wrap {
+  position: relative;
+}
+
+.header__logo {
+  position: fixed;
+  z-index: 1;
+  width: 190px;
+  top: 60px;
+  left: 60px;
+}
+
 .horizontal_scroll {
   position: absolute;
   top: 0;
@@ -69,35 +99,87 @@ onMounted(() => {
   height: 100vh;
 }
 
-.red {
-  background-color: #ff3d00;
+.fv {
+  background:url('~/assets/images/bg_01.jpg') center top / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.yellow {
-  background-color: #ffff00;
+.fv__logo {
+  width: 54vw;
+  max-width: 1042px;
 }
 
-.green {
-  background-color: #05ff00;
+
+
+.pick_up_01 {
+  background:url('~/assets/images/bg_02.jpg') center top / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.blue {
-  background-color: #2835f8;
+.pick_up_01__banner {
+  height: 100vh;
 }
 
-h2 {
-  font-size: 2rem;
-  color: #f7f7f7;
+.pick_up_02 {
+  background:url('~/assets/images/bg_03.jpg') center top / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.left {
-  margin-top: 5vh;
-  margin-left: 5vw;
+.pick_up_02__banner {
+  height: 100vh;
 }
 
-.right {
-  text-align: right;
-  margin-top: 85vh;
-  margin-right: 5vw;
+.gallery {
+  position: relative;
+  background:linear-gradient(to bottom ,#000000c8,#000000c8),url('~/assets/images/bg_01.jpg') center top / cover no-repeat;
+}
+
+.gallery__wrap {
+  display: flex;
+  gap: 45px;
+  margin-left: 5.9vw;
+  margin-top: 224px;
+}
+
+.gallery__links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  a {
+    img {
+      width: 83px;
+    }
+  }
+}
+
+.gallery__contents{
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 40px;
+  img {
+    width: 17vw;
+  }
+}
+
+.gallery__overlay {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000090;
+  .gallery__overlayImage {
+    height: 100vh;
+    width: auto;
+  }
 }
 </style>
