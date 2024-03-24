@@ -1,14 +1,10 @@
 <template>
   <div class="scroll_container">
     <div class="sticky_wrap">
-      <Transition name="logo" appear>
         <img class="header__logo" src="~/assets/images/logo_w.png">
-      </Transition>
       <div class="horizontal_scroll">
         <div class="scroll_contents fv">
-          <Transition name="logo" appear>
             <img class="fv__logo" src="~/assets/images/logo_b.png">
-          </Transition>
         </div>
         <div class="scroll_contents pick_up_01">
           <img class="pick_up_01__banner" src="~/assets/images/backnumber/2023_01.jpg">
