@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const generateImgPath = (fileYear: number,fileName: number): string => {
-  return new URL(`https://jaico-gallery.netlify.app/assets/images/backnumber/${fileYear}_0${fileName}.jpg`, import.meta.url).href
+  return new URL(`~/assets/images/backnumber/${fileYear}_0${fileName}.jpg`, import.meta.url).href
 }
 
 const isOverlayDisplay = ref(false)
