@@ -1,33 +1,39 @@
 <template>
   <div class="scroll_container">
-      <div class="sticky_wrap">
+    <div class="sticky_wrap">
+      <Transition name="logo" appear>
         <img class="header__logo" src="~/assets/images/logo_w.png">
-        <div class="horizontal_scroll">
-          <div class="scroll_contents fv">
+      </Transition>
+      <div class="horizontal_scroll">
+        <div class="scroll_contents fv">
+          <Transition name="logo" appear>
             <img class="fv__logo" src="~/assets/images/logo_b.png">
-          </div>
-          <div class="scroll_contents pick_up_01">
-            <img class="pick_up_01__banner" src="~/assets/images/backnumber/2023_01.jpg">
-          </div>
-          <div class="scroll_contents pick_up_02">
-            <img class="pick_up_02__banner" src="~/assets/images/backnumber/2022_01.jpg">
-          </div>
-          <div class="scroll_contents gallery">
-            <div class="gallery__wrap">
-              <div class="gallery__links">
-                <a @click="currentYear = 0"><img src="~/assets/images/link_2024.png"></a>
-                <a @click="currentYear = 1"><img src="~/assets/images/link_2023.png"></a>
-                <a @click="currentYear = 2"><img src="~/assets/images/link_2022.png"></a>
-                <a @click="currentYear = 3"><img src="~/assets/images/link_2021.png"></a>
-              </div>
-              <div class="gallery__contents">
+          </Transition>
+        </div>
+        <div class="scroll_contents pick_up_01">
+          <img class="pick_up_01__banner" src="~/assets/images/backnumber/2023_01.jpg">
+        </div>
+        <div class="scroll_contents pick_up_02">
+          <img class="pick_up_02__banner" src="~/assets/images/backnumber/2022_01.jpg">
+        </div>
+        <div class="scroll_contents gallery">
+          <div class="gallery__wrap">
+            <div class="gallery__links">
+              <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
+              <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
+              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
+              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
+            </div>
+            <Transition name="fade">
+              <div class="gallery__contents" v-if="contentsDisplay">
                 <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :length = "n" :year = "backnumberInfo[currentYear][0]" />
               </div>
-            </div>
+            </Transition>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +48,16 @@ const backnumberInfo = ref(
 )
 
 const currentYear = ref(0)
+
+//gallery__contentsのアニメーション効果
+const contentsDisplay = ref(true)
+
+const isDisplay = () => {
+    contentsDisplay.value = false
+    setTimeout(() => {
+      contentsDisplay.value = true
+  }, 500)
+}
 
 
 const transform = (section) => {
@@ -66,6 +82,7 @@ onMounted(() => {
   })
 })
 
+
 </script>
 
 <style lang="scss">
@@ -84,6 +101,11 @@ onMounted(() => {
   width: 190px;
   top: 60px;
   left: 60px;
+  @include mq(sm) {
+    width: 105px;
+    top: 10px;
+    left: 10px;
+  }
 }
 
 .horizontal_scroll {
@@ -118,6 +140,9 @@ onMounted(() => {
 .fv__logo {
   width: 54vw;
   max-width: 1042px;
+  @include mq(sm) {
+    width: 80vw;
+  }
 }
 
 
@@ -131,6 +156,10 @@ onMounted(() => {
 
 .pick_up_01__banner {
   height: 100vh;
+  @include mq(sm) {
+    height: auto;
+    width: 100vw;
+  }
 }
 
 .pick_up_02 {
@@ -142,6 +171,10 @@ onMounted(() => {
 
 .pick_up_02__banner {
   height: 100vh;
+  @include mq(sm) {
+    height: auto;
+    width: 100vw;
+  }
 }
 
 .gallery {
@@ -154,6 +187,9 @@ onMounted(() => {
   gap: 45px;
   margin-left: 5.9vw;
   margin-top: 224px;
+  @include mq(sm) {
+    margin-top: 70px;
+  }
 }
 
 .gallery__links {
@@ -163,6 +199,9 @@ onMounted(() => {
   a {
     img {
       width: 83px;
+      @include mq(sm) {
+        width: 52px;
+      }
     }
   }
 }
@@ -171,8 +210,20 @@ onMounted(() => {
   display: flex;
   flex-direction: row-reverse;
   gap: 20px;
+  @include mq(sm) {
+    height: calc(100vh - 70px);
+    padding: 0 0 30px;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+  }
   img {
     height: 20vw;
+    @include mq(sm) {
+      height: auto;
+      width: 61.3vw;
+    }
   }
 }
 
@@ -192,6 +243,16 @@ onMounted(() => {
     max-width: 100vw;
     object-fit: contain;
   }
+}
+
+.logo-enter-active,
+.logo-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.logo-enter-from,
+.logo-leave-to {
+  opacity: 0;
 }
 
 .fade-enter-active,
