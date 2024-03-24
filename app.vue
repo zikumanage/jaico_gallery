@@ -15,13 +15,13 @@
           <div class="scroll_contents gallery">
             <div class="gallery__wrap">
               <div class="gallery__links">
-                <a><img src="~/assets/images/link_2024.png"></a>
-                <a><img src="~/assets/images/link_2023.png"></a>
-                <a><img src="~/assets/images/link_2022.png"></a>
-                <a><img src="~/assets/images/link_2021.png"></a>
+                <a @click="currentYear = 0"><img src="~/assets/images/link_2024.png"></a>
+                <a @click="currentYear = 1"><img src="~/assets/images/link_2023.png"></a>
+                <a @click="currentYear = 2"><img src="~/assets/images/link_2022.png"></a>
+                <a @click="currentYear = 3"><img src="~/assets/images/link_2021.png"></a>
               </div>
               <div class="gallery__contents">
-                <GallaryItem v-for="n in backnumberLength[0]" :length = "n" />
+                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :length = "n" :year = "backnumberInfo[currentYear][0]" />
               </div>
             </div>
           </div>
@@ -32,7 +32,16 @@
 
 <script setup lang="ts">
 
-const backnumberLength = ref([2,4,1,3])
+const backnumberInfo = ref(
+  [ 
+    [2024,2],
+    [2023,4],
+    [2022,1],
+    [2021,3]
+  ]
+)
+
+const currentYear = ref(0)
 
 
 const transform = (section) => {
@@ -161,9 +170,9 @@ onMounted(() => {
 .gallery__contents{
   display: flex;
   flex-direction: row-reverse;
-  gap: 40px;
+  gap: 20px;
   img {
-    width: 17vw;
+    height: 20vw;
   }
 }
 
@@ -180,6 +189,8 @@ onMounted(() => {
   .gallery__overlayImage {
     height: 100vh;
     width: auto;
+    max-width: 100vw;
+    object-fit: contain;
   }
 }
 </style>

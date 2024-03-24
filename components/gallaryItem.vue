@@ -1,8 +1,8 @@
 <template>
     <a @click="isOverlayDisplay = !isOverlayDisplay">
-      <img :src="generateImgPath(length)">
+      <img :src="generateImgPath(year,length)">
       <div class="gallery__overlay" v-show="isOverlayDisplay">
-        <img class="gallery__overlayImage" :src="generateImgPath(length)">
+        <img class="gallery__overlayImage" :src="generateImgPath(year,length)">
       </div>
     </a>
   </template>
@@ -10,11 +10,12 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  length: Number
+  length: Number,
+  year: Number
 })
 
-const generateImgPath = (fileName: number): string => {
-  return new URL(`../assets/images/backnumber/2024_0${fileName}.jpg`, import.meta.url).href
+const generateImgPath = (fileYear: number,fileName: number): string => {
+  return new URL(`../assets/images/backnumber/${fileYear}_0${fileName}.jpg`, import.meta.url).href
 }
 
 const isOverlayDisplay = ref(false)
