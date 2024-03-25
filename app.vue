@@ -1,17 +1,25 @@
 <template>
   <div class="scroll_container">
     <div class="sticky_wrap">
-        <img class="header__logo" src="~/assets/images/logo_w.png">
-      <div class="horizontal_scroll">
-        <div class="scroll_contents fv">
+      <Transition name="fade">
+        <img class="header__logo" src="~/assets/images/logo_w.png" v-show="scrollChange01">
+      </Transition>
+      <div class="horizontal_scroll" id="scroll">
+        <Transition name="fade" appear>
+          <div class="scroll_contents fv">
             <img class="fv__logo" src="~/assets/images/logo_b.png">
-        </div>
-        <div class="scroll_contents pick_up_01">
-          <img class="pick_up_01__banner" src="~/assets/images/backnumber/2023_01.jpg">
-        </div>
-        <div class="scroll_contents pick_up_02">
-          <img class="pick_up_02__banner" src="~/assets/images/backnumber/2022_01.jpg">
-        </div>
+          </div>
+        </Transition>
+        <Transition name="fade">
+          <div class="scroll_contents pick_up_01" v-show="scrollChange01">
+            <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg">
+          </div>
+        </Transition>
+        <Transition name="fade">
+          <div class="scroll_contents pick_up_02" v-show="scrollChange02">
+            <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg">
+          </div>
+        </Transition>
         <div class="scroll_contents gallery">
           <div class="gallery__wrap">
             <div class="gallery__links">
@@ -22,7 +30,7 @@
             </div>
             <Transition name="fade">
               <div class="gallery__contents" v-if="contentsDisplay">
-                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :length = "n" :year = "backnumberInfo[currentYear][0]" />
+                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :key="n" :length="n" :year="backnumberInfo[currentYear][0]" />
               </div>
             </Transition>
           </div>
@@ -55,15 +63,39 @@ const isDisplay = () => {
   }, 500)
 }
 
+const scrollChange01 = ref(false)
+const scrollChange02 = ref(false)
+const scrollChange03 = ref(false)
 
 const transform = (section) => {
   const offsetTop = section.parentElement.offsetTop;
 
   const scrollSection = section.querySelector('.horizontal_scroll')
 
-  let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
+  let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100
 
-  percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage;
+
+  if (percentage > 1 && percentage < 30){
+
+    percentage = 100
+    scrollChange01.value = true
+
+  } else if (percentage > 30 && percentage < 60 ){
+
+    percentage = 200
+    scrollChange02.value = true
+
+  } else if (percentage > 60 && percentage < 120 ) {
+
+    percentage = 300
+    scrollChange03.value = true
+
+  } else if (percentage < 2 ) {
+    scrollChange01.value = false
+    scrollChange02.value = false
+    scrollChange03.value = false
+  }
+
 
   scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
 };
@@ -76,6 +108,7 @@ onMounted(() => {
       transform(stickySections[i])
     }
   })
+  
 })
 
 
@@ -84,7 +117,8 @@ onMounted(() => {
 <style lang="scss">
 
 .scroll_container {
-  height: 400vh;
+  height: 200vh;
+  width: 100vw;
 }
 
 .sticky_wrap {
@@ -105,17 +139,20 @@ onMounted(() => {
 }
 
 .horizontal_scroll {
-  position: absolute;
-  top: 0;
-  height: 100%;
+  overflow: auto;
+  height: 100vh;
+  // scroll-snap-type: x mandatory;
   width: 400vw;
-  will-change: transform;
+  // will-change: transform;
   display: flex;
-  justify-content: space-between;
+  // flex-direction: column;
+  // justify-content: space-between;
 }
 
 .scroll_contents {
-  height: 100%;
+  // scroll-snap-align: start;
+  height: 100vh;
+  // height: 100%;
   width: 100vw;
 }
 
@@ -191,7 +228,7 @@ onMounted(() => {
 .gallery__links {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 36px;
   a {
     img {
       width: 83px;
@@ -241,16 +278,6 @@ onMounted(() => {
   }
 }
 
-.logo-enter-active,
-.logo-leave-active {
-  transition: opacity 1.5s ease;
-}
-
-.logo-enter-from,
-.logo-leave-to {
-  opacity: 0;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -261,13 +288,13 @@ onMounted(() => {
   opacity: 0;
 }
 
-.fade-enter-active .gallery__overlayImage,
-.fade-leave-active .gallery__overlayImage {
+.fade-enter-active .slide-in,
+.fade-leave-active .slide-in {
   transition: transform 0.5s ease;
 }
 
-.fade-enter-from .gallery__overlayImage,
-.fade-leave-to .gallery__overlayImage {
+.fade-enter-from .slide-in,
+.fade-leave-to .slide-in {
   transform: translateX(100%);
 }
 </style>
