@@ -5,11 +5,9 @@
         <img class="header__logo" src="~/assets/images/logo_w.png" v-show="scrollChange01">
       </Transition>
       <div class="horizontal_scroll" id="scroll">
-        <Transition name="fade" appear>
           <div class="scroll_contents fv">
             <img class="fv__logo" src="~/assets/images/logo_b.png">
           </div>
-        </Transition>
         <Transition name="fade">
           <div class="scroll_contents pick_up_01" v-show="scrollChange01">
             <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg">
