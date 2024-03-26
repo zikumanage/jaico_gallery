@@ -147,9 +147,10 @@ onMounted(() => {
   width: 100vw;
 }
 
+
+
 .sticky_wrap {
   position: relative;
-  transition: all 3s ease;
 }
 
 .header__logo {
@@ -174,6 +175,13 @@ onMounted(() => {
   display: flex;
   // flex-direction: column;
   // justify-content: space-between;
+  /*Firefoxへの対応*/
+  scrollbar-width: none;
+}
+
+/*Google Chrome、Safariへの対応*/
+.horizontal_scroll::-webkit-scrollbar{
+  display: none;
 }
 
 .scroll_contents {
@@ -307,7 +315,7 @@ onMounted(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 2.5s ease;
+  transition: opacity 1.5s ease;
 }
 
 .fade-enter-from,
@@ -317,11 +325,31 @@ onMounted(() => {
 
 .fade-enter-active .slide-in,
 .fade-leave-active .slide-in {
-  transition: transform 1.5s ease;
+  transition: transform 0.5s ease;
 }
 
 .fade-enter-from .slide-in,
 .fade-leave-to .slide-in {
+  transform: translateX(100%);
+}
+
+.overlay-enter-active,
+.overlay-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.overlay-enter-from,
+.overlay-leave-to {
+  opacity: 0;
+}
+
+.overlay-enter-active .slide-in,
+.overlay-leave-active .slide-in {
+  transition: transform 0.5s ease;
+}
+
+.overlay-enter-from .slide-in,
+.overlay-leave-to .slide-in {
   transform: translateX(100%);
 }
 </style>
