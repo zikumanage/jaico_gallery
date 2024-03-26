@@ -65,6 +65,19 @@ const scrollChange01 = ref(false)
 const scrollChange02 = ref(false)
 const scrollChange03 = ref(false)
 
+const noscroll = ( e ) => {
+    e.preventDefault()
+  }
+
+const scrollstop = () => { 
+  document.addEventListener( 'wheel', noscroll, { passive: false } )
+  console.log('off')
+  setTimeout(() => {
+    document.removeEventListener( 'wheel', noscroll)
+    console.log('on')
+  }, 1000)
+}
+
 const transform = (section) => {
   const offsetTop = section.parentElement.offsetTop;
 
@@ -72,18 +85,20 @@ const transform = (section) => {
 
   let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100
 
+  // percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage
+  console.log(percentage)
 
-  if (percentage > 1 && percentage < 30){
+  if (percentage > 2 && percentage < 20){
 
     percentage = 100
     scrollChange01.value = true
 
-  } else if (percentage > 30 && percentage < 60 ){
+  } else if (percentage > 20 && percentage < 30 ){
 
     percentage = 200
     scrollChange02.value = true
 
-  } else if (percentage > 60 && percentage < 120 ) {
+  } else if (percentage > 30 && percentage < 102 ) {
 
     percentage = 300
     scrollChange03.value = true
@@ -94,8 +109,19 @@ const transform = (section) => {
     scrollChange03.value = false
   }
 
+  scrollSection.animate(
+  {
+    transform: `translate3d(${-(percentage)}vw, 0, 0)`
+  },
+  {
+    fill: "forwards",
+    duration: 3000
+  }
+)
 
-  scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
+scrollstop()
+
+  // scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
 };
 
 onMounted(() => {
@@ -121,6 +147,7 @@ onMounted(() => {
 
 .sticky_wrap {
   position: relative;
+  transition: all 3s ease;
 }
 
 .header__logo {
@@ -278,7 +305,7 @@ onMounted(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 2.5s ease;
 }
 
 .fade-enter-from,
@@ -288,7 +315,7 @@ onMounted(() => {
 
 .fade-enter-active .slide-in,
 .fade-leave-active .slide-in {
-  transition: transform 0.5s ease;
+  transition: transform 1.5s ease;
 }
 
 .fade-enter-from .slide-in,
