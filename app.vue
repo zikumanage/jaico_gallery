@@ -76,17 +76,17 @@ const transform = (section) => {
   // percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage
   console.log(percentage)
 
-  if (percentage > 2 && percentage < 20){
+  if (percentage > 2 && percentage < 40){
 
     percentage = 100
     scrollChange01.value = true
 
-  } else if (percentage > 20 && percentage < 30 ){
+  } else if (percentage > 40 && percentage < 75 ){
 
     percentage = 200
     scrollChange02.value = true
 
-  } else if (percentage > 30 && percentage < 102 ) {
+  } else if (percentage > 75 && percentage < 102 ) {
 
     percentage = 300
     scrollChange03.value = true
