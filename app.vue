@@ -61,22 +61,10 @@ const isDisplay = () => {
   }, 500)
 }
 
+//slideっぽい移動
 const scrollChange01 = ref(false)
 const scrollChange02 = ref(false)
 const scrollChange03 = ref(false)
-
-const noscroll = ( e ) => {
-    e.preventDefault()
-  }
-
-const scrollstop = () => { 
-  document.addEventListener( 'wheel', noscroll, { passive: false } )
-  console.log('off')
-  setTimeout(() => {
-    document.removeEventListener( 'wheel', noscroll)
-    console.log('on')
-  }, 1000)
-}
 
 const transform = (section) => {
   const offsetTop = section.parentElement.offsetTop;
@@ -118,6 +106,20 @@ const transform = (section) => {
     duration: 3000
   }
 )
+
+//一時スクロールイベントを止める
+const noscroll = ( e ) => {
+    e.preventDefault()
+  }
+
+const scrollstop = () => { 
+  document.addEventListener( 'wheel', noscroll, { passive: false } )
+  console.log('off')
+  setTimeout(() => {
+    document.removeEventListener( 'wheel', noscroll)
+    console.log('on')
+  }, 1000)
+}
 
 scrollstop()
 
