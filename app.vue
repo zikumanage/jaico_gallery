@@ -66,6 +66,22 @@ const scrollChange01 = ref(false)
 const scrollChange02 = ref(false)
 const scrollChange03 = ref(false)
 
+//一時スクロールイベントを止める
+const noscroll = ( e ) => {
+    e.preventDefault()
+  }
+
+const scrollstop = () => { 
+  document.addEventListener('touchmove', noscroll, {passive: false})
+  document.addEventListener( 'wheel', noscroll, { passive: false } )
+  console.log('off')
+  setTimeout(() => {
+    document.removeEventListener('touchmove', noscroll)
+    document.removeEventListener( 'wheel', noscroll)
+    console.log('on')
+  }, 1000)
+}
+
 const transform = (section) => {
   const offsetTop = section.parentElement.offsetTop;
 
@@ -76,19 +92,19 @@ const transform = (section) => {
   // percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage
   console.log(percentage)
 
-  if (percentage > 2 && percentage < 40){
+  if (percentage > 10 && percentage < 150){
 
-    percentage = 100
+    // percentage = 100
     scrollChange01.value = true
 
-  } else if (percentage > 40 && percentage < 75 ){
+  } else if (percentage > 150 && percentage < 250 ){
 
-    percentage = 200
+    // percentage = 200
     scrollChange02.value = true
 
-  } else if (percentage > 75 && percentage < 102 ) {
+  } else if (percentage > 250 && percentage < 301 ) {
 
-    percentage = 300
+    // percentage = 300
     scrollChange03.value = true
 
   } else if (percentage < 2 ) {
@@ -106,24 +122,8 @@ const transform = (section) => {
     duration: 3000
   }
 )
-
-//一時スクロールイベントを止める
-const noscroll = ( e ) => {
-    e.preventDefault()
-  }
-
-const scrollstop = () => { 
-  document.addEventListener( 'wheel', noscroll, { passive: false } )
-  console.log('off')
-  setTimeout(() => {
-    document.removeEventListener( 'wheel', noscroll)
-    console.log('on')
-  }, 1000)
-}
-
-scrollstop()
-
-  // scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
+  // scrollstop()
+// scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
 };
 
 onMounted(() => {
@@ -143,7 +143,7 @@ onMounted(() => {
 <style lang="scss">
 
 .scroll_container {
-  height: 200vh;
+  height: 400vh;
   width: 100vw;
 }
 
@@ -169,25 +169,13 @@ onMounted(() => {
 .horizontal_scroll {
   overflow: auto;
   height: 100vh;
-  // scroll-snap-type: x mandatory;
   width: 400vw;
-  // will-change: transform;
   display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
-  /*Firefoxへの対応*/
-  scrollbar-width: none;
 }
 
-/*Google Chrome、Safariへの対応*/
-.horizontal_scroll::-webkit-scrollbar{
-  display: none;
-}
 
 .scroll_contents {
-  // scroll-snap-align: start;
   height: 100vh;
-  // height: 100%;
   width: 100vw;
 }
 
@@ -279,18 +267,19 @@ onMounted(() => {
   flex-direction: row-reverse;
   gap: 20px;
   @include mq(sm) {
-    height: calc(100vh - 70px);
+    height: auto;
     padding: 0 0 30px;
     box-sizing: border-box;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
     overflow-y: scroll;
+    gap: 12px;
   }
   img {
     height: 20vw;
     @include mq(sm) {
       height: auto;
-      width: 61.3vw;
+      width: 25vw;
     }
   }
 }
@@ -315,7 +304,7 @@ onMounted(() => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1.5s ease;
+  transition: opacity 5s ease;
 }
 
 .fade-enter-from,
@@ -325,7 +314,7 @@ onMounted(() => {
 
 .fade-enter-active .slide-in,
 .fade-leave-active .slide-in {
-  transition: transform 0.5s ease;
+  transition: transform 2s ease;
 }
 
 .fade-enter-from .slide-in,
