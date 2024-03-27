@@ -74,7 +74,7 @@ const noscroll = ( e ) => {
 const scrollstop = () => { 
   document.addEventListener('touchmove', noscroll, {passive: false})
   document.addEventListener( 'wheel', noscroll, { passive: false } )
-  console.log('off')
+  // console.log('off')
   setTimeout(() => {
     document.removeEventListener('touchmove', noscroll)
     document.removeEventListener( 'wheel', noscroll)
@@ -90,7 +90,7 @@ const transformX = (section) => {
   let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100
 
   // percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage
-  console.log(percentage)
+  // console.log(percentage)
 
   if (percentage > 10 && percentage < 150){
 
@@ -133,7 +133,7 @@ const transformY = (section) => {
 
   let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100
 
-  console.log(percentage)
+  // console.log(percentage)
 
   if (percentage > 10 && percentage < 70){
     scrollChange01.value = true
