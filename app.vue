@@ -82,7 +82,7 @@ const scrollstop = () => {
   }, 1000)
 }
 
-const transform = (section) => {
+const transformX = (section) => {
   const offsetTop = section.parentElement.offsetTop;
 
   const scrollSection = section.querySelector('.horizontal_scroll')
@@ -126,12 +126,51 @@ const transform = (section) => {
 // scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
 };
 
+const transformY = (section) => {
+  const offsetTop = section.parentElement.offsetTop;
+
+  const scrollSection = section.querySelector('.horizontal_scroll')
+
+  let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100
+
+  console.log(percentage)
+
+  if (percentage > 10 && percentage < 70){
+    scrollChange01.value = true
+
+  } else if (percentage > 70 && percentage < 140 ){
+    scrollChange02.value = true
+
+  } else if (percentage > 140 && percentage < 200 ) {
+    scrollChange03.value = true
+
+  } else if (percentage < 2 ) {
+    scrollChange01.value = false
+    scrollChange02.value = false
+    scrollChange03.value = false
+  }
+
+  scrollSection.animate(
+  {
+    transform: `translate3d(0, ${-(percentage)}vh, 0)`
+  },
+  {
+    fill: "forwards",
+    duration: 3000
+  }
+)
+};
+
 onMounted(() => {
   const stickySections = [...document.querySelectorAll('.sticky_wrap')]
   
   window.addEventListener('scroll', (e) => {
     for(let i = 0; i < stickySections.length; i++){
-      transform(stickySections[i])
+      if(window.innerWidth > 768) {
+        transformX(stickySections[i])
+      } else {
+        transformY(stickySections[i])
+      }
     }
   })
   
@@ -145,12 +184,9 @@ onMounted(() => {
 .scroll_container {
   height: 400vh;
   width: 100vw;
-}
-
-
-
-.sticky_wrap {
-  position: relative;
+  @include mq(sm) {
+    height: 300vh;
+  }
 }
 
 .header__logo {
@@ -171,6 +207,10 @@ onMounted(() => {
   height: 100vh;
   width: 400vw;
   display: flex;
+  @include mq(sm) {
+    flex-direction: column;
+    height: 400vh;
+  }
 }
 
 
@@ -184,6 +224,9 @@ onMounted(() => {
   position: sticky;
   top: 0;
   height: 100vh;
+  @include mq(sm) {
+    height: 200vh;
+  }
 }
 
 .fv {
