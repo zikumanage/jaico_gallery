@@ -4,6 +4,7 @@
       :modules="[SwiperMousewheel,SwiperEffectFade,SwiperEffectCube,SwiperParallax]"
       :direction="'vertical'"
       :autoHeight="true"
+      :allowTouchMove="false"
       :slidesPerView="1"
       :mousewheel="{
         enabled:true
@@ -234,7 +235,7 @@ onUpdated(() => {
     padding: 0 0 30px;
     box-sizing: border-box;
     justify-content: flex-end;
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap;
     overflow-y: scroll;
     gap: 12px;
   }
@@ -257,6 +258,9 @@ onUpdated(() => {
   width: 100vw;
   height: 100vh;
   background-color: #00000090;
+  @include mq(sm) {
+    transform: translateX(-6vw);
+  }
   .gallery__overlayImage {
     height: 100vh;
     width: auto;
