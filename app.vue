@@ -29,7 +29,7 @@
       </SwiperSlide>
       <SwiperSlide>
         <div class="scroll_contents pick_up_01 only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
-          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-x="-60%">
+          <img class="header__logo" src="~/assets/images/logo_w.png">
           <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg" data-swiper-parallax-x="-70%">
         </div>
         <div class="scroll_contents pick_up_01 only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
@@ -39,11 +39,11 @@
       </SwiperSlide>
       <SwiperSlide>
         <div class="scroll_contents pick_up_02 only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
-          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-x="-60%">
+          <img class="header__logo" src="~/assets/images/logo_w.png">
           <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg" data-swiper-parallax-x="-70%">
         </div>
         <div class="scroll_contents pick_up_02 only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
-          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-y="-60%">
+          <img class="header__logo" src="~/assets/images/logo_w.png">
           <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg" data-swiper-parallax-y="-70%">
         </div>
       </SwiperSlide>
@@ -205,7 +205,7 @@ onUpdated(() => {
 .gallery__wrap {
   display: flex;
   gap: 45px;
-  margin-left: 5.9vw;
+  padding-left: 5.9vw;
   padding-top: 224px;
   @include mq(sm) {
     padding-top: 70px;
@@ -259,9 +259,6 @@ onUpdated(() => {
   width: 100vw;
   height: 100vh;
   background-color: #00000090;
-  @include mq(sm) {
-    transform: translateX(-6vw);
-  }
   .gallery__overlayImage {
     height: 100vh;
     width: auto;
