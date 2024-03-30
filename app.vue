@@ -209,6 +209,7 @@ onUpdated(() => {
   padding-top: 224px;
   @include mq(sm) {
     padding-top: 70px;
+    align-items: flex-start;
   }
 }
 
