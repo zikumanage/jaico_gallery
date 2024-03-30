@@ -228,13 +228,13 @@ onUpdated(() => {
 
 .gallery__contents{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   gap: 20px;
   @include mq(sm) {
     height: auto;
     padding: 0 0 30px;
     box-sizing: border-box;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex-wrap: wrap;
     overflow-y: scroll;
     gap: 12px;
@@ -278,7 +278,7 @@ onUpdated(() => {
 
 .fade-enter-active .slide-in,
 .fade-leave-active .slide-in {
-  transition: transform 2s ease;
+  transition: transform 1s ease;
 }
 
 .fade-enter-from .slide-in,
