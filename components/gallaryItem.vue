@@ -3,7 +3,7 @@
       <img :src="`https://raw.githubusercontent.com/zikumanage/jaico_gallery/main/assets/images/backnumber/${year}_0${length}.jpg`">
       <Transition name="overlay">
         <div class="gallery__overlay" v-show="isOverlayDisplay">
-          <img class="gallery__overlayImage slide-in" :src="`https://raw.githubusercontent.com/zikumanage/jaico_gallery/main/assets/images/backnumber/${year}_0${length}.jpg`">
+          <img class="gallery__overlayImage slide-in" :src="`https://raw.githubusercontent.com/zikumanage/jaico_gallery/use-swiper/assets/images/backnumber/${year}_0${length}.jpg`">
         </div>
       </Transition>
     </a>

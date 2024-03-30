@@ -1,37 +1,71 @@
 <template>
   <div class="scroll_container">
-    <Transition name="fade">
-      <img class="header__logo" src="~/assets/images/logo_w.png" v-show="true">
-    </Transition>
     <Swiper
-      :modules="[SwiperMousewheel,SwiperEffectFade,SwiperEffectCube]"
-      :slides-per-view="1"
-      :loop="false"
+      :modules="[SwiperMousewheel,SwiperEffectFade,SwiperEffectCube,SwiperParallax]"
+      :direction="'vertical'"
+      :autoHeight="true"
+      :slidesPerView="1"
       :mousewheel="{
         enabled:true
       }"
-      :parallax="true"
       :speed="1000"
+      :parallax="true"
+      :breakpoints="{
+        768:{
+          direction:'horizontal'
+        }
+      }"
+      
     >
         
       <SwiperSlide>
-        <div class="scroll_contents fv">
-          <img class="fv__logo" src="~/assets/images/logo_b.png">
+        <div class="scroll_contents fv only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
+          <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-x="-70%">
+        </div>
+        <div class="scroll_contents fv only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
+          <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-y="-70%">
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div class="scroll_contents pick_up_01">
-          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg">
+        <div class="scroll_contents pick_up_01 only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-x="-60%">
+          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg" data-swiper-parallax-x="-70%">
+        </div>
+        <div class="scroll_contents pick_up_01 only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-y="-60%">
+          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg" data-swiper-parallax-y="-70%">
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div class="scroll_contents pick_up_02">
-          <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg">
+        <div class="scroll_contents pick_up_02 only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-x="-60%">
+          <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg" data-swiper-parallax-x="-70%">
+        </div>
+        <div class="scroll_contents pick_up_02 only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-y="-60%">
+          <img class="pick_up_02__banner slide-in" src="~/assets/images/backnumber/2022_01.jpg" data-swiper-parallax-y="-70%">
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div class="scroll_contents gallery">
-          <div class="gallery__wrap">
+        <div class="scroll_contents gallery only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-x="-60%">
+          <div class="gallery__wrap" data-swiper-parallax-x="-70%">
+            <div class="gallery__links">
+              <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
+              <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
+              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
+              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
+            </div>
+            <Transition name="fade">
+              <div class="gallery__contents" v-if="contentsDisplay">
+                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :key="n" :length="n" :year="backnumberInfo[currentYear][0]" />
+              </div>
+            </Transition>
+          </div>
+        </div>
+        <div class="scroll_contents gallery only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
+          <img class="header__logo" src="~/assets/images/logo_w.png" data-swiper-parallax-y="-60%">
+          <div class="gallery__wrap" data-swiper-parallax-y="-70%">
             <div class="gallery__links">
               <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
               <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
@@ -54,7 +88,7 @@
 
 const backnumberInfo = ref(
   [ 
-    [2024,2],
+    [2024,3],
     [2023,4],
     [2022,1],
     [2021,3]
@@ -74,13 +108,7 @@ const isDisplay = () => {
 }
 
 
-onMounted(() => {
-  const activeSections = document.querySelector('.swiper-slide-active')
-  
-  window.addEventListener('scroll', (e) => {
-    
-  })
-  
+onUpdated(() => {
 })
 
 
@@ -89,21 +117,29 @@ onMounted(() => {
 <style lang="scss">
 
 .scroll_container {
-  height: 400vh;
-  width: 100vw;
-  @include mq(sm) {
-    height: 300vh;
-  }
+  width: 100%;
+  height: 100%;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  width: 100%;
+  // これ入れないとswiper縦に動かない
+  height: auto !important;
 }
 
 .header__logo {
   position: fixed;
   z-index: 2;
   width: 190px;
-  top: 60px;
+  top: 40px;
   left: 60px;
   @include mq(sm) {
-    width: 105px;
+    width: 85px;
     top: 10px;
     left: 10px;
   }
@@ -129,8 +165,6 @@ onMounted(() => {
     width: 80vw;
   }
 }
-
-
 
 .pick_up_01 {
   background:url('~/assets/images/bg_02.jpg') center top / cover no-repeat;
@@ -173,7 +207,7 @@ onMounted(() => {
   margin-left: 5.9vw;
   padding-top: 224px;
   @include mq(sm) {
-    margin-top: 70px;
+    padding-top: 70px;
   }
 }
 
