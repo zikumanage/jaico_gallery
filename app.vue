@@ -29,11 +29,11 @@
       <SwiperSlide>
         <div class="scroll_contents pick_up_01 only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
           <img class="header__logo" src="~/assets/images/logo_w.png">
-          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg" data-swiper-parallax-x="-70%">
+          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_04.jpg" data-swiper-parallax-x="-70%">
         </div>
         <div class="scroll_contents pick_up_01 only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
           <img class="header__logo" src="~/assets/images/logo_w.png">
-          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_01.jpg" data-swiper-parallax-y="-70%">
+          <img class="pick_up_01__banner slide-in" src="~/assets/images/backnumber/2023_04.jpg" data-swiper-parallax-y="-70%">
         </div>
       </SwiperSlide>
       <SwiperSlide>
