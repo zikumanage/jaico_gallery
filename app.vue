@@ -4,7 +4,6 @@
       :modules="[SwiperMousewheel,SwiperEffectFade,SwiperEffectCube,SwiperParallax]"
       :direction="'vertical'"
       :autoHeight="true"
-      :allowTouchMove="false"
       :slidesPerView="1"
       :mousewheel="{
         enabled:true
