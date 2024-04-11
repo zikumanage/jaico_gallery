@@ -57,45 +57,39 @@
               <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
             <Transition name="fade">
-              <div class="gallery__contents" v-if="contentsDisplay">
+              <div class="gallery__contents" :class="{contentsDisplay: iscontentsDisplay}">
                 <div>
                   <p class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay">x</p>
-                  <Swiper
-                  :style="{
-                    '--swiper-navigation-color': '#fff',
-                    '--swiper-navigation-size': '30px',
-                  }"
-                  :loop="true"
-                  :spaceBetween="10"
-                  :navigation="true"
-                  :thumbs="{ swiper: thumbsSwiper }"
-                  :modules="modules"
-                  class="mySwiper2 gallery__overlay"
-                >
-                  <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
-                    <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)">
-                  </SwiperSlide>
-                  <!-- <SwiperSlide style="color: #fff;font-size:120px">1</SwiperSlide>
-                  <SwiperSlide style="color: #fff;font-size:120px">2</SwiperSlide>
-                  <SwiperSlide style="color: #fff;font-size:120px">3</SwiperSlide> -->
+                  <Swiper :class="{OverlayDisplay : isOverlayDisplay}"
+                    :style="{
+                      '--swiper-navigation-color': '#fff',
+                      '--swiper-navigation-size': '30px',
+                    }"
+                    :loop="true"
+                    :spaceBetween="10"
+                    :navigation="true"
+                    :thumbs="{ swiper: thumbsSwiper }"
+                    :modules="modules"
+                    class="mySwiper2 gallery__overlay"
+                  >
+                    <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
+                      <!-- <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
+                      <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                    </SwiperSlide>
                 </Swiper>
                 <Swiper
                     @swiper="setThumbsSwiper"
-                    :loop="true"
                     :spaceBetween="20"
                     :freeMode="true"
-                    :watchSlidesProgress="true"
                     :modules="modules"
                     class="mySwiper"
                   >
                   <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
                     <a @click="isOverlayDisplay = !isOverlayDisplay">
-                      <img :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                      <!-- <img :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
+                      <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
                     </a>
                   </SwiperSlide>
-                  <!-- <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">11</SwiperSlide>
-                  <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">22</SwiperSlide>
-                  <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">33</SwiperSlide> -->
                 </Swiper>
                 </div>
               </div>
@@ -106,13 +100,13 @@
           <img class="header__logo" src="~/assets/images/logo_w.png">
           <div class="gallery__wrap" data-swiper-parallax-y="-70%">
             <div class="gallery__links">
-              <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
+              <a @click="currentYear = 0;isDisplay();"><img src="~/assets/images/link_2024.png"></a>
               <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
               <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
               <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
             <Transition name="fade">
-              <div class="gallery__contents" v-if="contentsDisplay">
+              <div class="gallery__contents">
                 <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :key="n" :length="n" :year="backnumberInfo[currentYear][0]" />
               </div>
             </Transition>
@@ -160,13 +154,13 @@ const imgSrc = (year : number, n : number) => {
 }
 
 //gallery__contentsのアニメーション効果
-const contentsDisplay = ref(true)
+const iscontentsDisplay = ref(true)
 
 const isDisplay = () => {
-    contentsDisplay.value = false
+    iscontentsDisplay.value = false
     setTimeout(() => {
-      contentsDisplay.value = true
-  }, 500)
+      iscontentsDisplay.value = true
+  }, 200)
 }
 
 
@@ -292,6 +286,7 @@ onUpdated(() => {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  opacity: 0;
   @include mq(sm) {
     height: auto;
     padding: 0 0 30px;
@@ -312,16 +307,16 @@ onUpdated(() => {
 
 .gallery__overlay {
   position: absolute;
-  z-index: 2;
+  z-index: -1;
   top: 0;
   left: 0;
   display: flex;
   justify-content: flex-end;
-  // width: 100vw;
-  width: 200px;
-  height: 200px;
-  // height: 100vh;
+  width: 100vw;
+  // height: 200px;
+  height: 100vh;
   background-color: #00000090;
+  opacity: 0;
   .gallery__overlayImage {
     height: 100vh;
     width: auto;
@@ -370,9 +365,12 @@ onUpdated(() => {
   transform: translateX(100%);
 }
 
+.mySwiper {
+
+}
 
 .mySwiper .swiper-slide {
-  // width: 100%!important;
+  width: auto!important;
   height: 100%;
 }
 
@@ -393,5 +391,16 @@ onUpdated(() => {
   top: 0;
   left: 50%;
   transform: translateX(-50%)
+}
+
+.OverlayDisplay {
+  opacity: 1;
+  z-index: 2;
+  transition: all 1.5s ease; 
+}
+
+.contentsDisplay {
+  opacity: 1;
+  transition: all .3s ease; 
 }
 </style>
