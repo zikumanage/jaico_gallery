@@ -58,7 +58,46 @@
             </div>
             <Transition name="fade">
               <div class="gallery__contents" v-if="contentsDisplay">
-                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :key="n" :length="n" :year="backnumberInfo[currentYear][0]" />
+                <div>
+                  <p class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay">x</p>
+                  <Swiper
+                  :style="{
+                    '--swiper-navigation-color': '#fff',
+                    '--swiper-navigation-size': '30px',
+                  }"
+                  :loop="true"
+                  :spaceBetween="10"
+                  :navigation="true"
+                  :thumbs="{ swiper: thumbsSwiper }"
+                  :modules="modules"
+                  class="mySwiper2 gallery__overlay"
+                >
+                  <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
+                    <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                  </SwiperSlide>
+                  <!-- <SwiperSlide style="color: #fff;font-size:120px">1</SwiperSlide>
+                  <SwiperSlide style="color: #fff;font-size:120px">2</SwiperSlide>
+                  <SwiperSlide style="color: #fff;font-size:120px">3</SwiperSlide> -->
+                </Swiper>
+                <Swiper
+                    @swiper="setThumbsSwiper"
+                    :loop="true"
+                    :spaceBetween="20"
+                    :freeMode="true"
+                    :watchSlidesProgress="true"
+                    :modules="modules"
+                    class="mySwiper"
+                  >
+                  <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
+                    <a @click="isOverlayDisplay = !isOverlayDisplay">
+                      <img :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                    </a>
+                  </SwiperSlide>
+                  <!-- <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">11</SwiperSlide>
+                  <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">22</SwiperSlide>
+                  <SwiperSlide @click="isOverlayDisplay = !isOverlayDisplay">33</SwiperSlide> -->
+                </Swiper>
+                </div>
               </div>
             </Transition>
           </div>
@@ -86,6 +125,24 @@
 
 <script setup lang="ts">
 
+// import required modules
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
+ // Import Swiper styles
+ import 'swiper/css';
+
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+
+const modules = ref([FreeMode, Navigation, Thumbs]);
+
+const thumbsSwiper = ref(null);
+
+const setThumbsSwiper = (swiper) => {
+  thumbsSwiper.value = swiper;
+}
+
 const backnumberInfo = ref(
   [ 
     [2024,3],
@@ -94,8 +151,13 @@ const backnumberInfo = ref(
     [2021,3]
   ]
 )
-
 const currentYear = ref(0)
+
+const isOverlayDisplay = ref(false)
+
+const imgSrc = (year : number, n : number) => {
+    return new URL(`/assets/images/backnumber/${year}_0${n}.jpg`, import.meta.url).href
+}
 
 //gallery__contentsのアニメーション効果
 const contentsDisplay = ref(true)
@@ -255,8 +317,10 @@ onUpdated(() => {
   left: 0;
   display: flex;
   justify-content: flex-end;
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  width: 200px;
+  height: 200px;
+  // height: 100vh;
   background-color: #00000090;
   .gallery__overlayImage {
     height: 100vh;
@@ -304,5 +368,30 @@ onUpdated(() => {
 .overlay-enter-from .slide-in,
 .overlay-leave-to .slide-in {
   transform: translateX(100%);
+}
+
+
+.mySwiper .swiper-slide {
+  // width: 100%!important;
+  height: 100%;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.mySwiper2 {
+  .swiper-slide {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.swiperClose {
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%)
 }
 </style>

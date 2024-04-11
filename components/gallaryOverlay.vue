@@ -1,16 +1,12 @@
 <template>
   <SwiperSlide>
-    <!-- <a @click="isOverlayDisplay = !isOverlayDisplay">
-      <img :src="image.default">
-    </a> -->
-    <img :src="image.default">
+        <div class="gallery__overlay">
+          <img class="gallery__overlayImage slide-in" :src="image.default">
+        </div>
   </SwiperSlide>
   </template>
 
 <script setup lang="ts">
-
-// import required modules
-import { SwiperSlide } from 'swiper/vue';
 
 const props = defineProps({
   length: Number,
@@ -26,7 +22,5 @@ try {
 } catch (e) {
   console.log(e)
 }
-
-const isOverlayDisplay = ref(false)
 
 </script>
