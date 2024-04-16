@@ -21,9 +21,11 @@
       <SwiperSlide>
         <div class="scroll_contents fv only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
           <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-x="-70%">
+          <img class="fv__scroll" src="~/assets/images/scroll.png">
         </div>
         <div class="scroll_contents fv only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
           <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-y="-70%">
+          <img class="fv__scroll" src="~/assets/images/scroll.png">
         </div>
       </SwiperSlide>
       <SwiperSlide>
@@ -56,10 +58,9 @@
               <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
               <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
-            <Transition name="fade">
               <div class="gallery__contents" :class="{contentsDisplay: iscontentsDisplay}">
                 <div>
-                  <p class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay">x</p>
+                  <a class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay"><img src="~/assets/images/close.png"></a>
                   <Swiper :class="{OverlayDisplay : isOverlayDisplay}"
                     :style="{
                       '--swiper-navigation-color': '#fff',
@@ -93,7 +94,6 @@
                 </Swiper>
                 </div>
               </div>
-            </Transition>
           </div>
         </div>
         <div class="scroll_contents gallery only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
@@ -105,11 +105,42 @@
               <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
               <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
-            <Transition name="fade">
-              <div class="gallery__contents">
-                <GallaryItem v-for="n in backnumberInfo[currentYear][1]" :key="n" :length="n" :year="backnumberInfo[currentYear][0]" />
+              <div class="gallery__contents" :class="{contentsDisplay: iscontentsDisplay}">
+                <a class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay"><img src="~/assets/images/close.png"></a>
+                <Swiper :class="{OverlayDisplay : isOverlayDisplay}"
+                    :style="{
+                      '--swiper-navigation-color': '#fff',
+                      '--swiper-navigation-size': '24px',
+                    }"
+                    :loop="true"
+                    :spaceBetween="10"
+                    :navigation="true"
+                    :thumbs="{ swiper: thumbsSwiperSP }"
+                    :modules="modules"
+                    class="mySwiper2 gallery__overlay"
+                  >
+                    <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
+                      <!-- <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
+                      <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                    </SwiperSlide>
+                </Swiper>
+                <Swiper
+                    @swiper="setThumbsSwiperSP"
+                    :autoHeight="true"
+                    :spaceBetween="20"
+                    :freeMode="true"
+                    :modules="modules"
+                    :width="300"
+                    class="mySwiper"
+                  >
+                  <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
+                    <a @click="isOverlayDisplay = !isOverlayDisplay">
+                      <!-- <img :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
+                      <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                    </a>
+                  </SwiperSlide>
+                </Swiper>
               </div>
-            </Transition>
           </div>
         </div>
       </SwiperSlide>
@@ -132,9 +163,14 @@ import 'swiper/css/thumbs';
 const modules = ref([FreeMode, Navigation, Thumbs]);
 
 const thumbsSwiper = ref(null);
+const thumbsSwiperSP = ref(null);
 
 const setThumbsSwiper = (swiper) => {
   thumbsSwiper.value = swiper;
+}
+
+const setThumbsSwiperSP = (swiper) => {
+  thumbsSwiperSP.value = swiper;
 }
 
 const backnumberInfo = ref(
@@ -219,6 +255,27 @@ onUpdated(() => {
   max-width: 1042px;
   @include mq(sm) {
     width: 80vw;
+  }
+}
+
+.fv__scroll {
+  width: 40px;
+  height: auto;
+  position: absolute;
+  left: 50vw;
+  transform: translateX(-50%);
+  animation: scroll 2s ease-in-out infinite; 
+}
+
+@keyframes scroll {
+  0% {
+    bottom: 30px;
+  }
+  50% {
+    bottom: 50px;
+  }
+  100% {
+    bottom: 30px;
   }
 }
 
@@ -325,53 +382,20 @@ onUpdated(() => {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.fade-enter-active .slide-in,
-.fade-leave-active .slide-in {
-  transition: transform 1s ease;
-}
-
-.fade-enter-from .slide-in,
-.fade-leave-to .slide-in {
-  transform: translateX(100%);
-}
-
-.overlay-enter-active,
-.overlay-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.overlay-enter-from,
-.overlay-leave-to {
-  opacity: 0;
-}
-
-.overlay-enter-active .slide-in,
-.overlay-leave-active .slide-in {
-  transition: transform 0.5s ease;
-}
-
-.overlay-enter-from .slide-in,
-.overlay-leave-to .slide-in {
-  transform: translateX(100%);
-}
-
-.mySwiper {
-
+.mySwiper .swiper-wrapper {
+  @include mq(sm) {
+    flex-wrap: wrap;
+    height: auto!important;
+    transform: none!important;
+  }
 }
 
 .mySwiper .swiper-slide {
   width: auto!important;
   height: 100%;
+  @include mq(sm) {
+    margin-bottom: 15px;
+  }
 }
 
 .mySwiper .swiper-slide-thumb-active {
@@ -388,15 +412,37 @@ onUpdated(() => {
 .swiperClose {
   position: absolute;
   z-index: 99;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%)
+  top: 10px;
+  left: 50vw;
+  transform: translateX(-50%);
+  @include mq(sm) {
+    width: 40px;
+    height: 40px;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+    @include mq(sm) {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 
 .OverlayDisplay {
-  opacity: 1;
   z-index: 2;
-  transition: all 1.5s ease; 
+  transition: all .1s ease;
+  animation: overlay 1s ease forwards; 
+}
+
+@keyframes overlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .contentsDisplay {
