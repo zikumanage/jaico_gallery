@@ -363,14 +363,13 @@ onUpdated(() => {
 }
 
 .gallery__overlay {
-  position: absolute;
-  z-index: -1;
+  position: absolute!important;
+  z-index: -1!important;
   top: 0;
   left: 0;
   display: flex;
   justify-content: flex-end;
   width: 100vw;
-  // height: 200px;
   height: 100vh;
   background-color: #00000090;
   opacity: 0;
