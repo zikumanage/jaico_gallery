@@ -439,7 +439,7 @@ onUpdated(() => {
 }
 
 .OverlayDisplay {
-  z-index: 2;
+  z-index: 2!important;
   transition: all .1s ease;
   animation: overlay 1s ease forwards; 
 }
