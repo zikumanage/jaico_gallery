@@ -185,9 +185,19 @@ const currentYear = ref(0)
 
 const isOverlayDisplay = ref(false)
 
-const imgSrc = (year : number, n : number) => {
-    return new URL(`/assets/images/backnumber/${year}_0${n}.jpg`, import.meta.url).href
-}
+// const imgSrc = (year : number, n : number) => {
+//     return new URL(`/assets/images/backnumber/${year}_0${n}.jpg`, import.meta.url).href
+// }
+
+// let image = {
+//   default:''
+// }
+
+// try {
+//   image = await import(`~/assets/images/backnumber/${props.year}_0${props.length}.jpg`)
+// } catch (e) {
+//   console.log(e)
+// }
 
 //gallery__contentsのアニメーション効果
 const iscontentsDisplay = ref(true)
