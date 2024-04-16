@@ -74,8 +74,8 @@
                     class="mySwiper2 gallery__overlay"
                   >
                     <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
-                      <!-- <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
-                      <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                      <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                      <!-- <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'"> -->
                     </SwiperSlide>
                 </Swiper>
                 <Swiper
@@ -87,8 +87,8 @@
                   >
                   <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
                     <a @click="isOverlayDisplay = !isOverlayDisplay">
-                      <!-- <img :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
-                      <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                      <img :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                      <!-- <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'"> -->
                     </a>
                   </SwiperSlide>
                 </Swiper>
@@ -120,8 +120,8 @@
                     class="mySwiper2 gallery__overlay"
                   >
                     <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
-                      <!-- <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
-                      <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                      <img class="gallery__overlayImage slide-in" :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                      <!-- <img class="gallery__overlayImage slide-in" :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'"> -->
                     </SwiperSlide>
                 </Swiper>
                 <Swiper
@@ -135,8 +135,8 @@
                   >
                   <SwiperSlide v-for="n in backnumberInfo[currentYear][1]" :key="n">
                     <a @click="isOverlayDisplay = !isOverlayDisplay">
-                      <!-- <img :src="imgSrc(backnumberInfo[currentYear][0],n)"> -->
-                      <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'">
+                      <img :src="imgSrc(backnumberInfo[currentYear][0],n)">
+                      <!-- <img :src="'/_nuxt/assets/images/backnumber/'+backnumberInfo[currentYear][0]+'_0'+n+'.jpg'"> -->
                     </a>
                   </SwiperSlide>
                 </Swiper>
