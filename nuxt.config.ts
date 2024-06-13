@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.scss","@/assets/css/_variables.scss"],
   app:{
     baseURL: '/jaico_gallery/',
+    buildAssetsDir: 'output',
     head: {
     title: 'JAICO',
     htmlAttrs: {
