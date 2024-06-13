@@ -10,12 +10,12 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/css/variables.scss";',
+          additionalData: '@use "@/assets/css/_variables.scss";',
         },
       },
     },
   },
-  css: ["@/assets/css/main.scss"],
+  css: ["@/assets/css/main.scss","@/assets/css/_variables.scss"],
   app:{
     baseURL: '/jaico_gallery/',
     head: {
