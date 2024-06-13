@@ -218,6 +218,23 @@ onUpdated(() => {
 
 <style lang="scss">
 
+  $breakpoints: (
+  'ss': 'screen and (max-width: 532px)',
+  'sm': 'screen and (max-width: 768px)',
+  'md': 'screen and (max-width: 1024px)'
+) !default;
+
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+$text-black: #461300;
+$text-white: #FFEBE5;
+$bg: #F9CDCE;
+$bg-accent: #961829;
+
 .scroll_container {
   width: 100%;
   height: 100%;
