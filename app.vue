@@ -175,7 +175,7 @@ const setThumbsSwiperSP = (swiper) => {
 
 const backnumberInfo = ref(
   [ 
-    [2024,6],
+    [2024,9],
     [2023,4],
     [2022,1],
     [2021,3]
