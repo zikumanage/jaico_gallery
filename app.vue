@@ -372,7 +372,8 @@ $bg-accent: #961829;
   gap: 20px;
   opacity: 0;
   @include mq(sm) {
-    height: auto;
+    height: 100%;
+    // height: auto;
     padding: 0 0 30px;
     box-sizing: border-box;
     justify-content: flex-start;
@@ -432,6 +433,12 @@ $bg-accent: #961829;
   .swiper-slide {
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+.mySwiper {
+  @include mq(sm) {
+    height: auto;
   }
 }
 
