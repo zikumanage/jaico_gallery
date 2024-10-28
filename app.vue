@@ -175,7 +175,7 @@ const setThumbsSwiperSP = (swiper) => {
 
 const backnumberInfo = ref(
   [ 
-    [2024,9],
+    [2024,10],
     [2023,4],
     [2022,1],
     [2021,3]
@@ -410,8 +410,10 @@ $bg-accent: #961829;
 }
 
 .mySwiper .swiper-wrapper {
+  flex-wrap: wrap;
+  gap: 20px;
   @include mq(sm) {
-    flex-wrap: wrap;
+    gap: 0;
     height: auto!important;
     transform: none!important;
   }
