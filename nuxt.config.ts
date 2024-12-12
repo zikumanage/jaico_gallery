@@ -30,7 +30,8 @@ export default defineNuxtConfig({
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'JAICO' },
+      { hid: 'description', name: 'description', content: 'JAICO || JAICO FES' },
+      { hid: 'keywords', name: 'keywords', content: 'JAICO,JAICO FES,JAPAN IDOL CONNECT,jaico,J A I C O' },
       { hid: 'og:image', property: 'og:image', content: 'https://raw.githubusercontent.com/zikumanage/jaico_gallery/main/assets/images/logo_b.png' }
     ],
     link: [
