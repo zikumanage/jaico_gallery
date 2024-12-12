@@ -21,10 +21,16 @@
       <SwiperSlide>
         <div class="scroll_contents fv only-pc" data-swiper-parallax-x="90%" data-swiper-parallax-opacity="0">
           <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-x="-70%">
+          <a class="fv__x" href="https://x.com/jpidolconnect">
+            <img src="~/assets/images/icon-twitter_w.png">
+          </a>
           <img class="fv__scroll" src="~/assets/images/scroll.png">
         </div>
         <div class="scroll_contents fv only-sp" data-swiper-parallax-y="90%" data-swiper-parallax-opacity="0">
           <img class="fv__logo" src="~/assets/images/logo_b.png" data-swiper-parallax-y="-70%">
+          <a class="fv__x" href="https://x.com/jpidolconnect">
+            <img src="~/assets/images/icon-twitter_w.png">
+          </a>
           <img class="fv__scroll" src="~/assets/images/scroll.png">
         </div>
       </SwiperSlide>
@@ -273,8 +279,10 @@ $bg-accent: #961829;
 .fv {
   background:url('~/assets/images/bg_01.jpg') center top / cover no-repeat;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 50px;
 }
 
 .fv__logo {
@@ -282,6 +290,26 @@ $bg-accent: #961829;
   max-width: 1042px;
   @include mq(sm) {
     width: 80vw;
+  }
+}
+
+.fv__x {
+  width: 30px;
+  height: 30px;
+  background: #000;
+  padding: 20px;
+  border-radius: 100px;
+  &:hover {
+    opacity: .6;
+  }
+  @include mq(sm) {
+    width: 25px;
+    height: 25px;
+    padding: 15px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -483,5 +511,9 @@ $bg-accent: #961829;
 .contentsDisplay {
   opacity: 1;
   transition: all .3s ease; 
+}
+
+.swiper-slide-active {
+  z-index: 99;
 }
 </style>
