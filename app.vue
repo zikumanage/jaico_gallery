@@ -59,10 +59,11 @@
           <img class="header__logo" src="~/assets/images/logo_w.png">
           <div class="gallery__wrap" data-swiper-parallax-x="-70%">
             <div class="gallery__links">
-              <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
-              <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
-              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
-              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
+              <a @click="currentYear = 0;isDisplay()"><img src="~/assets/images/link_2025.png"></a>
+              <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2024.png"></a>
+              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
+              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
+              <a @click="currentYear = 4;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
               <div class="gallery__contents" :class="{contentsDisplay: iscontentsDisplay}">
                 <div>
@@ -106,10 +107,11 @@
           <img class="header__logo" src="~/assets/images/logo_w.png">
           <div class="gallery__wrap" data-swiper-parallax-y="-70%">
             <div class="gallery__links">
-              <a @click="currentYear = 0;isDisplay();"><img src="~/assets/images/link_2024.png"></a>
-              <a @click="currentYear = 1;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
-              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
-              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
+              <a @click="currentYear = 0;isDisplay();"><img src="~/assets/images/link_2025.png"></a>
+              <a @click="currentYear = 1;isDisplay();"><img src="~/assets/images/link_2024.png"></a>
+              <a @click="currentYear = 2;isDisplay()"><img src="~/assets/images/link_2023.png"></a>
+              <a @click="currentYear = 3;isDisplay()"><img src="~/assets/images/link_2022.png"></a>
+              <a @click="currentYear = 4;isDisplay()"><img src="~/assets/images/link_2021.png"></a>
             </div>
               <div class="gallery__contents" :class="{contentsDisplay: iscontentsDisplay}">
                 <a class="swiperClose" @click="isOverlayDisplay = !isOverlayDisplay" v-show="isOverlayDisplay"><img src="~/assets/images/close.png"></a>
@@ -181,6 +183,7 @@ const setThumbsSwiperSP = (swiper) => {
 
 const backnumberInfo = ref(
   [ 
+    [2025,1],
     [2024,10],
     [2023,4],
     [2022,1],
